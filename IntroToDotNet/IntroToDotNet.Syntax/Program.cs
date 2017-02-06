@@ -275,7 +275,7 @@ namespace IntroToDotNet.Syntax
 &&  logical AND
 ||  logical OR
 !   logical NOT (often read as 'bang')
-^   logical XOR (exclusive OR)");
+^   logical XOR (exclusive OR) See https://msdn.microsoft.com/en-us/library/zkacc7k1.aspx for more info on XOR");
 
             int num3 = random.Next(100);
             if (num3 >= 0 && num3 <= 20)
@@ -541,16 +541,24 @@ namespace IntroToDotNet.Syntax
 
             Console.WriteLine($"Specific teacher is {specificTeacher}");
 
+            // We can use the DefaultIfEmpty which will use whatever you pass in the parameter if the
+            // code encounters no values. 
+            IEnumerable<Teacher> defaultIfEmpty = teachers.Where(teacher => teacher.Grade == 15)
+                .DefaultIfEmpty(new Teacher());
+
+            Console.WriteLine($"No teachers were found who teaches 15th grade: {string.Join("\n", defaultIfEmpty)}");
+            
             // Maybe you just need to know if values exist in the collection. You can do this
             bool valuesExist = teachers.Any();
                 
             // You can do that with a condition as well.
             bool teachersExist = teachers.Any(teacher => teacher.Grade > 13);
+            int teacherCount = teachers.Count(teacher => teacher.Grade > 13);
             Console.WriteLine($"Are there any teachers teaching anything above 13th grade? {teachersExist}");
 
             // Another thing that is handy sometimes is easy casting.
-            var teachers2 = teachers.ToArray();
-            var teachers3 = teachers2.ToList();
+            Teacher[] teachers2 = teachers.ToArray();
+            List<Teacher> teachers3 = teachers2.ToList();
 
             AskIfThereAreQuestions();
         }
@@ -574,9 +582,14 @@ namespace IntroToDotNet.Syntax
                             // The code you believe may throw an exception would go here
                             throw new NotImplementedException("I'm not implemented yet man!");
                         }
-                        catch (NotImplementedException) // We can catch any type of exception that inherits the base class Exception
+                        catch (NotImplementedException)
+                            // We can catch any type of exception that inherits the base class Exception
                         {
                             // Throw simply continues the exception that it caught upwards through your application
+                            throw;
+                        }
+                        catch (Exception ex)
+                        {
                             throw;
                         }
                         finally
@@ -584,7 +597,7 @@ namespace IntroToDotNet.Syntax
                             // If there is code that always needs to execute, regardless if an exception occurs, it goes here
                             Console.WriteLine("An exception occurred but I still ran in the finally block");
                         }
-                
+
                     }
                     catch (Exception ex)
                     {
