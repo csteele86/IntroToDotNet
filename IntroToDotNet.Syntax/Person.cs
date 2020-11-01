@@ -1,4 +1,4 @@
-﻿namespace IntroToDotNet.Syntax.vNext
+﻿namespace IntroToDotNet.Syntax
 {
 	public class Person
 	{

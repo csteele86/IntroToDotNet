@@ -1,7 +1,7 @@
 ﻿using System;
 
 // All classes need to be wrapped in a namespace
-namespace IntroToDotNet.Syntax.vNext
+namespace IntroToDotNet.Syntax
 {
 	class Program
 	{

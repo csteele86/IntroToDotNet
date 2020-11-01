@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace IntroToDotNet.Syntax.vNext
+namespace IntroToDotNet.Syntax
 {
 	public static class Linqq
 	{

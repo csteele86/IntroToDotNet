@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IntroToDotNet.Syntax.vNext
+namespace IntroToDotNet.Syntax
 {
 	public static class Dates
 	{
