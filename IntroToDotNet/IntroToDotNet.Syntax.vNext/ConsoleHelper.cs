@@ -42,7 +42,7 @@ namespace IntroToDotNet.Syntax.vNext
 		public static void WriteSnippet(string text, bool addExampleText = true)
 		{
 			Console.BackgroundColor = ConsoleColor.Black;
-			Console.ForegroundColor = ConsoleColor.Gray;
+			Console.ForegroundColor = ConsoleColor.White;
 
 			if (addExampleText)
 			{
