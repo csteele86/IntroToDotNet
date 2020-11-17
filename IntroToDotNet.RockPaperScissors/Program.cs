@@ -42,6 +42,7 @@ namespace IntroToDotNet.RockPaperScissors
 		{
 			public string PlayerName { get; set; }
 			public Move Move { get; set; }
+			public string InputtedPlayerMoves { get; set; }
 		}
 
 		private static Stats _stats;
@@ -52,6 +53,12 @@ namespace IntroToDotNet.RockPaperScissors
 			Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 			_args = ReadArguments(args) ?? new Args();
+
+			if (_args.InputtedPlayerMoves != null)
+			{
+				var inputtedPlayerMoves = new InputtedPlayerMoves();
+				await inputtedPlayerMoves.Populate(_args.InputtedPlayerMoves);
+			}
 
 			Console.WriteLine("Would you like to play a game?? How about Rock, Paper, Scissors?!");
 
@@ -82,13 +89,15 @@ namespace IntroToDotNet.RockPaperScissors
 				var argParser = new FluentCommandLineParser<Args>();
 				argParser.Setup(arg => arg.PlayerName)
 					.As('n', "fame")
-					.WithDescription("Enter your name.")
-					.Required();
+					.WithDescription("Enter your name.");
 
 				argParser.Setup(arg => arg.Move)
 					.As('m', "move")
-					.WithDescription("Choose what you want to play - Rock (1), Paper (2), or Scissors (3)")
-					.Required();
+					.WithDescription("Choose what you want to play - Rock (1), Paper (2), or Scissors (3)");
+
+				argParser.Setup(arg => arg.InputtedPlayerMoves)
+					.As('i', "playerMoves")
+					.WithDescription("Provides the ability to play the game from a csv file - name, move, number of times");
 
 				var result = argParser.Parse(args);
 
